@@ -1,7 +1,7 @@
 class RepositoriesController < ApplicationController
 
   def index
-    head :ok
+    @repositories = Repository.all
   end
 
   def new

@@ -11,6 +11,6 @@ RSpec.describe "AddRepositories", type: :system do
     fill_in "Repository name:", with: "Microsoft/vscode"
 
     click_button "Save"
-    expect(Repository.exists?(owner: 'Microsoft', name: 'vscode')).to be true
+    expect(page).to have_text("Microsoft/vscode")
   end
 end
