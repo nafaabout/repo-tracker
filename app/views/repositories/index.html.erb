@@ -1,5 +1,5 @@
 <div>
   <% @repositories.each do |repo| %>
-    <%= repo.full_name %>
+    <%= link_to repo.full_name, repo %>
   <% end %>
 </div>

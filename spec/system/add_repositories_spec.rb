@@ -11,6 +11,6 @@ RSpec.describe "AddRepositories", type: :system do
     fill_in "Repository name:", with: "Microsoft/vscode"
 
     click_button "Save"
-    expect(page).to have_text("Microsoft/vscode")
+    expect(page).to have_link("Microsoft/vscode")
   end
 end
