@@ -1,0 +1,15 @@
+<%= form_for :repository, url: create_repository_path do |form| %>
+  <% if @repository.errors.any? %>
+    <div class="errors">
+      <% @repository.errors.full_messages.each do |error| %>
+        <div class="error">
+          <%= error %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <%= form.label :full_name, "Repository name:" %>
+  <%= form.text_field :full_name, placeholder: 'owner/repository' %>
+
+  <%= form.submit "Save" %>
+<% end %>
