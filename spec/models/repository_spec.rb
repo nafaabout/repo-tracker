@@ -13,7 +13,7 @@ require 'rails_helper'
 
 RSpec.describe Repository, type: :model do
   describe '#full_name' do
-    it "returns the full name of the repository owner/name" do
+    it 'returns the full name of the repository owner/name' do
       repo = Fabricate.build(:repository)
 
       expect(repo.full_name).to eq("#{repo.owner}/#{repo.name}")

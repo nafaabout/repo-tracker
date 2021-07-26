@@ -14,5 +14,5 @@ Fabricator(:owner) do
   login      { Faker::Internet.username }
   avatar_url { Faker::Avatar.image }
   name       { Faker::Name.name }
-  owner_type { %w(orangization user).sample }
+  owner_type { %w[orangization user].sample }
 end
