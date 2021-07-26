@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 # ApplicationRecord is an abstract class, we cannot instantiate it, so tests will use

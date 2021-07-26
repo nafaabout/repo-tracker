@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RepositoryForm
   attr_reader :repository, :errors
   attr_accessor :owner, :name, :full_name
