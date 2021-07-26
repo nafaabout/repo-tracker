@@ -1,5 +1,4 @@
 class RepositoriesController < ApplicationController
-
   def index
     @repositories = Repository.all
   end
@@ -19,7 +18,6 @@ class RepositoriesController < ApplicationController
       render new_repository
     end
   end
-
 
   private
 

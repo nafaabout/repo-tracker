@@ -23,5 +23,4 @@ RSpec.describe "ManageRepositories", type: :system do
 
     expect(page).to have_link("Microsoft/vscode")
   end
-
 end

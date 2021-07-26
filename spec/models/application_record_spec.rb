@@ -15,7 +15,7 @@ RSpec.describe ApplicationRecord do
   describe 'On update' do
     it 'does not set id' do
       owner = Fabricate.build(:owner)
-      expect { owner.run_callbacks(:update) }.to_not change(owner,:id)
+      expect { owner.run_callbacks(:update) }.to_not change(owner, :id)
     end
   end
 end

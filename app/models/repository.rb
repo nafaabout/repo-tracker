@@ -10,7 +10,6 @@
 #  updated_at :datetime         not null
 #
 class Repository < ApplicationRecord
-
   def full_name
     "#{owner}/#{name}"
   end
