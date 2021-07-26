@@ -10,9 +10,7 @@
 #  updated_at :datetime         not null
 #
 Fabricator(:repository) do
-  id         ""
-  owner      "MyString"
-  name       "MyString"
-  created_at "2021-07-23 10:20:51"
-  updated_at "2021-07-23 10:20:51"
+  owner      { Faker::Name.first_name }
+  name       { Faker::Name.last_name }
+  after_build { |repo| repo.full_name = "#{repo.owner}/#{repo.name}"}
 end
