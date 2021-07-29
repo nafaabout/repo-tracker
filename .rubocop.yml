@@ -9,5 +9,19 @@
 #
 # See https://docs.rubocop.org/rubocop/configuration
 
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+    - 'lib/tasks/auto_annotate_models.rake'
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'Rakefile'
+    - '*.ru'
+
 Style/Documentation:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'db/**/*'
