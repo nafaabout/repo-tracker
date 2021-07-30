@@ -33,4 +33,23 @@ RSpec.describe 'Repositories Homepage', type: :system do
       expect(page).to have_link('Microsoft/vscode')
     end
   end
+
+  describe 'show a repository' do
+    it 'Shows the Name of the repository' do
+      repository = Fabricate(:repository)
+
+      visit repository_path(repository.id)
+
+      expect(page).to have_selector('h2', text: repository.full_name)
+    end
+
+    xit 'Shows the list of commits' do
+    end
+
+    xit 'Shows the list of issues' do
+    end
+
+    xit 'Shows the list of discussions' do
+    end
+  end
 end
