@@ -18,6 +18,9 @@ AllCops:
     - 'config/**/*'
     - 'Rakefile'
     - '*.ru'
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
 
 Style/Documentation:
   Enabled: false
@@ -25,3 +28,4 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Exclude:
     - 'db/**/*'
+    - 'Gemfile'
