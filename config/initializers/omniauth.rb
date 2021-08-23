@@ -1,4 +1,4 @@
-AUTH0_KEYS = Rails.application.credentials.dig(Rails.env.to_sym,:auth0)
+AUTH0_KEYS = Rails.application.credentials.dig(Rails.env.to_sym,:auth0) || {}
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider(
@@ -16,3 +16,4 @@ end
 OmniAuth.config.on_failure = -> (env) do
   Rack::Response.new(['302 Moved'], 302, 'Location' => env['omniauth.origin'] || "/").finish
 end
+

@@ -7,8 +7,9 @@ class AuthenticationController < ApplicationController
     # Refer to https://github.com/auth0/omniauth-auth0#authentication-hash for complete information on
     # 'omniauth.auth' contents.
     auth_info = request.env['omniauth.auth']
-    session[:userinfo] = auth_info['extra']['raw_info']
+    user = create_user(build_user_attributes(auth_info))
 
+    session[:user_id] = user.id
     # Redirect to the URL you want after successful auth
     redirect_to root_path
   end
@@ -25,7 +26,7 @@ class AuthenticationController < ApplicationController
 
   private
 
-  AUTH0_KEYS = Rails.application.credentials[Rails.env.to_sym][:auth0]
+  AUTH0_KEYS = Rails.application.credentials.dig(Rails.env.to_sym, :auth0) || {}
 
   def logout_url
     request_params = {
@@ -34,5 +35,19 @@ class AuthenticationController < ApplicationController
     }
 
     URI::HTTPS.build(host: AUTH0_KEYS[:domain], path: '/v2/logout', query: request_params.to_query).to_s
+  end
+
+  def create_user(user_attrs)
+    user = User.find_or_initialize_by(uid: user_attrs[:uid])
+    user.update(user_attrs)
+    user
+  end
+
+  def build_user_attributes(auth_info)
+    auth_info['info'].merge({
+                              uid: auth_info['uid'],
+                              token: auth_info['credentials']['token'],
+                              token_type: auth_info['credentials']['token_type']
+                            })
   end
 end
