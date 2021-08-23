@@ -29,3 +29,4 @@ Style/FrozenStringLiteralComment:
   Exclude:
     - 'db/**/*'
     - 'Gemfile'
+    - 'spec/**/*'

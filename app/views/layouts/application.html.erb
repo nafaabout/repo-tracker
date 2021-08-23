@@ -11,6 +11,12 @@
   </head>
 
   <body>
+    <div style="display: inline-block; margin:10px;">
+      <%= button_to 'Login', '/auth/auth0', method: :post %>
+    </div>
+    <div style="display: inline-block; margin:10px;">
+      <%= button_to 'Logout', '/auth/logout', method: :get %>
+    </div>
     <%= yield %>
   </body>
 </html>

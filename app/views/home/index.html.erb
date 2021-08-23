@@ -1,0 +1,7 @@
+<div>
+  <% if @user.present? %>
+    Logged user info: <%= JSON.pretty_generate(@user) %>
+  <% else %>
+    Login please
+  <% end %>
+</div>

@@ -33,14 +33,17 @@ gem 'ruby-ulid', '>= 0.1.6', '< 0.2.0'
 
 gem 'octokit'
 gem 'omniauth', '~> 2.0'
-gem 'omniauth-github', '~> 2.0'
+gem 'omniauth-auth0', '~> 3.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
 
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'fabrication', '~> 2.22'
   gem 'faker', '~> 2.18'

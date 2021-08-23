@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe 'Repositories Homepage', type: :system do
@@ -43,13 +41,10 @@ RSpec.describe 'Repositories Homepage', type: :system do
       expect(page).to have_selector('h2', text: repository.full_name)
     end
 
-    xit 'Shows the list of commits' do
-    end
+    it 'Shows the list of commits'
 
-    xit 'Shows the list of issues' do
-    end
+    it 'Shows the list of issues'
 
-    xit 'Shows the list of discussions' do
-    end
+    it 'Shows the list of discussions'
   end
 end
