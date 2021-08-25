@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @user = session[:userinfo]
+    @user = User.find_by(id: session[:user_id])
   end
 end

@@ -39,7 +39,7 @@ class AuthenticationController < ApplicationController
 
   def create_user(user_attrs)
     user = User.find_or_initialize_by(uid: user_attrs[:uid])
-    user.update(user_attrs)
+    user.update(user_attrs.to_h)
     user
   end
 
