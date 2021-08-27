@@ -6,6 +6,7 @@
     "@rails/activestorage": "latest",
     "@rails/webpacker": "^6.0.0-rc.5",
     "babel-plugin-macros": "^3.1.0",
+    "tailwindcss": "^2.2.8",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"
   },

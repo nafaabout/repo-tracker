@@ -6,16 +6,18 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag "application" %>
   </head>
 
   <body>
-    <div style="display: inline-block; margin:10px;">
-      <%= button_to 'Login', '/auth/auth0', method: :post %>
+    <div class='inline-block '>
+      <%= button_to 'Login', '/auth/auth0', method: :post, class: 'rounded bg-green-400 cursor-pointer p-2 mx-2' %>
     </div>
-    <div style="display: inline-block; margin:10px;">
-      <%= button_to 'Logout', '/auth/logout', method: :get %>
+    <div class='inline-block'>
+      <%= button_to 'Logout', '/auth/logout', method: :get, class: 'rounded bg-green-400 cursor-pointer p-2 mx-2'  %>
     </div>
     <%= yield %>
   </body>
