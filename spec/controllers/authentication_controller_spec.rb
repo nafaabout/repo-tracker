@@ -29,5 +29,11 @@ RSpec.describe AuthenticationController, type: :controller do
         expect { get 'callback' }.to change { user.reload.token }.to(token)
       end
     end
+
+    it 'redirects to dashboard' do
+      get 'callback'
+
+      expect(response).to redirect_to(dashboard_path)
+    end
   end
 end

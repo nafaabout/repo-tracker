@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'authentication#failure'
   get '/auth/logout' => 'authentication#logout'
 
+  get '/dashboard' => 'dashboard#show', as: :dashboard
 end
