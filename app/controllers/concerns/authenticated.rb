@@ -6,6 +6,6 @@ module Authenticated
   end
 
   def logged_in?
-    redirect_to root_path unless session[:userinfo].present?
+    redirect_to root_path unless session[:user_id].present?
   end
 end

@@ -12,13 +12,24 @@
     <%= javascript_pack_tag "application" %>
   </head>
 
-  <body>
-    <div class='inline-block '>
-      <%= button_to 'Login', '/auth/auth0', method: :post, class: 'rounded bg-green-400 cursor-pointer p-2 mx-2' %>
+  <body class='h-screen'>
+    <div class="container m-auto">
+      <div class='navbar flex justify-between items-center py-2 border-b border-gray-600 w-full'>
+        <div class='text-white'>
+          <img src="https://api.freelogodesign.org/files/7b858364219e4684a310b65255ed01e0/thumb/logo_764x400.png?1330" class='w-24'>
+        </div>
+        <div class=''>
+          <% if logged_in? %>
+            <%= button_to 'Logout', '/auth/logout', method: :get, class: 'rounded bg-green-600 text-white cursor-pointer p-2 mx-2' %>
+          <% else %>
+            <%= button_to 'Login', '/auth/auth0', method: :post, class: 'rounded bg-green-600 text-white cursor-pointer p-2 mx-2' %>
+          <% end %>
+        </div>
+      </div>
+
+      <div>
+        <%= yield %>
+      </div>
     </div>
-    <div class='inline-block'>
-      <%= button_to 'Logout', '/auth/logout', method: :get, class: 'rounded bg-green-400 cursor-pointer p-2 mx-2'  %>
-    </div>
-    <%= yield %>
   </body>
 </html>
