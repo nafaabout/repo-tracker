@@ -26,11 +26,9 @@ class AuthenticationController < ApplicationController
 
   private
 
-  def auth0_keys
-    @auth0_keys ||= Rails.application.credentials.dig(Rails.env.to_sym, :auth0) || {}
-  end
-
   def logout_url
+    auth0_keys = Rails.application.credentials.dig(Rails.env.to_sym, :auth0) || {}
+
     request_params = {
       returnTo: root_url,
       client_id: auth0_keys[:client_id]
