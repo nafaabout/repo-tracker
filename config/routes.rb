@@ -7,5 +7,4 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'authentication#failure'
   get '/auth/logout' => 'authentication#logout'
 
-  resources :repositories
 end
