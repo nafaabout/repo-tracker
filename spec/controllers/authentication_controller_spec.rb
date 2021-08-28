@@ -36,4 +36,22 @@ RSpec.describe AuthenticationController, type: :controller do
       expect(response).to redirect_to(dashboard_path)
     end
   end
+
+  describe 'GET logout' do
+    it 'redirects to logout url' do
+      expect(Rails.application).to receive(:credentials)
+        .and_return({ test: { auth0: { client_id: 'cid',
+                                       domain: 'domain' } } })
+      params = {
+        returnTo: root_url,
+        client_id: 'cid'
+      }
+      logout_url = 'https://domain/logout'
+      expect(URI::HTTPS).to receive(:build)
+        .with(host: 'domain', path: '/v2/logout', query: params.to_query)
+        .and_return(logout_url)
+      get 'logout'
+      expect(response).to redirect_to(logout_url)
+    end
+  end
 end

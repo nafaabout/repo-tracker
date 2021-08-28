@@ -26,15 +26,17 @@ class AuthenticationController < ApplicationController
 
   private
 
-  AUTH0_KEYS = Rails.application.credentials.dig(Rails.env.to_sym, :auth0) || {}
+  def auth0_keys
+    @auth0_keys ||= Rails.application.credentials.dig(Rails.env.to_sym, :auth0) || {}
+  end
 
   def logout_url
     request_params = {
       returnTo: root_url,
-      client_id: AUTH0_KEYS[:client_id]
+      client_id: auth0_keys[:client_id]
     }
 
-    URI::HTTPS.build(host: AUTH0_KEYS[:domain], path: '/v2/logout', query: request_params.to_query).to_s
+    URI::HTTPS.build(host: auth0_keys[:domain], path: '/v2/logout', query: request_params.to_query).to_s
   end
 
   def create_user(user_attrs)
