@@ -30,10 +30,10 @@ RSpec.describe AuthenticationController, type: :controller do
       end
     end
 
-    it 'redirects to dashboard' do
+    it 'redirects to settings page' do
       get 'callback'
 
-      expect(response).to redirect_to(dashboard_path)
+      expect(response).to redirect_to(settings_path)
     end
   end
 
