@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -14,4 +16,5 @@
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
+  has_many :user_topics
 end

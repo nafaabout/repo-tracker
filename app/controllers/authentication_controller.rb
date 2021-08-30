@@ -7,11 +7,18 @@ class AuthenticationController < ApplicationController
     # Refer to https://github.com/auth0/omniauth-auth0#authentication-hash for complete information on
     # 'omniauth.auth' contents.
     auth_info = request.env['omniauth.auth']
-    user = create_user(build_user_attributes(auth_info))
+
+    user = find_or_build_user(auth_info['uid'])
+    next_path = if user.persisted? && user.user_topics.present?
+                  dashboard_path
+                else
+                  settings_topics_path
+                end
+    update_user(user, build_user_attributes(auth_info))
 
     session[:user_id] = user.id
     # Redirect to the URL you want after successful auth
-    redirect_to settings_path
+    redirect_to next_path
   end
 
   def failure
@@ -37,8 +44,11 @@ class AuthenticationController < ApplicationController
     URI::HTTPS.build(host: auth0_keys[:domain], path: '/v2/logout', query: request_params.to_query).to_s
   end
 
-  def create_user(user_attrs)
-    user = User.find_or_initialize_by(uid: user_attrs[:uid])
+  def find_or_build_user(uid)
+    User.find_or_initialize_by(uid: uid)
+  end
+
+  def update_user(user, user_attrs)
     user.update(user_attrs.to_h)
     user
   end

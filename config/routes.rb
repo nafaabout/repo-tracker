@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   get '/auth/logout' => 'authentication#logout'
 
   get '/dashboard' => 'dashboard#show', as: :dashboard
-  get '/settings' => 'settings#index', as: :settings
+  namespace :settings do
+    resources :topics, only: [:index]
+  end
 end

@@ -19,6 +19,12 @@ RSpec.describe AuthenticationController, type: :controller do
 
         expect(session[:user_id]).to be_present
       end
+
+      it 'redirects to settings topics page' do
+        get 'callback'
+
+        expect(response).to redirect_to(settings_topics_path)
+      end
     end
 
     context 'WHEN user with email exists' do
@@ -28,12 +34,26 @@ RSpec.describe AuthenticationController, type: :controller do
       it 'updates the token of the user' do
         expect { get 'callback' }.to change { user.reload.token }.to(token)
       end
-    end
 
-    it 'redirects to settings page' do
-      get 'callback'
+      context 'AND user did not select topics' do
+        it 'redirects to settings topics page' do
+          user.user_topics.destroy_all
+          get 'callback'
 
-      expect(response).to redirect_to(settings_path)
+          expect(response).to redirect_to(settings_topics_path)
+        end
+      end
+
+      context 'AND user selected topics already' do
+        let!(:topics) { Fabricate.times(3, :topic) }
+        let!(:user_topics) { topics.map { |topic| Fabricate(:user_topic, user: user, topic: topic) } }
+
+        it 'redirects to dashboard page' do
+          get 'callback'
+
+          expect(response).to redirect_to(dashboard_path)
+        end
+      end
     end
   end
 
