@@ -282,6 +282,9 @@ GEM
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
     spring (2.1.1)
     spring-commands-rspec (1.0.4)
@@ -342,6 +345,7 @@ DEPENDENCIES
   rubocop-rspec
   ruby-ulid (>= 0.1.6, < 0.2.0)
   sass-rails (>= 6)
+  selenium-webdriver
   spring
   spring-commands-rspec
   tailwindcss-rails (~> 0.4.3)
