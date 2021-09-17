@@ -3,11 +3,15 @@
 module Authenticated
   extend ActiveSupport::Concern
 
+  include UserHelpers
+
   included do
-    before_action :logged_in?
+    before_action :ensure_logged_in
   end
 
-  def logged_in?
-    redirect_to root_path unless session[:user_id].present?
+  private
+
+  def ensure_logged_in
+    redirect_to root_path unless logged_in?
   end
 end
