@@ -129,6 +129,10 @@ GEM
     globalid (0.5.2)
       activesupport (>= 5.0)
     hashie (4.1.0)
+    hotwire-rails (0.1.3)
+      rails (>= 6.0.0)
+      stimulus-rails
+      turbo-rails
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
@@ -228,6 +232,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.4.0)
     regexp_parser (2.1.1)
     rexml (3.2.5)
     rspec-core (3.10.1)
@@ -296,10 +301,14 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stimulus-rails (0.5.3)
+      rails (>= 6.0.0)
     tailwindcss-rails (0.4.3)
       rails (>= 6.0.0)
     thor (1.1.0)
     tilt (2.0.10)
+    turbo-rails (0.7.14)
+      rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
@@ -328,6 +337,7 @@ DEPENDENCIES
   capybara
   fabrication (~> 2.22)
   faker (~> 2.18)
+  hotwire-rails (~> 0.1.3)
   jbuilder (~> 2.7)
   listen (~> 3.3)
   octokit
@@ -339,6 +349,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4)
+  redis (~> 4.0)
   rspec-rails (~> 5.0.0)
   rubocop
   rubocop-rails
