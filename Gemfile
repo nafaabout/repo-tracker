@@ -23,6 +23,7 @@ gem 'redis', '~> 4.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+gem 'hotwire-rails', '~> 0.1.3'
 gem 'tailwindcss-rails', '~> 0.4.3'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -72,5 +73,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
-gem "hotwire-rails", "~> 0.1.3"
