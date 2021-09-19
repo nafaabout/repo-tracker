@@ -17,4 +17,25 @@
 #
 class User < ApplicationRecord
   has_many :user_topics
+
+  def following?(topic)
+    user_topics.exists?(topic: topic)
+  end
+
+  def toggle_follow!(topic)
+    user_topic = user_topics.find_by(topic: topic)
+    if user_topic.present?
+      unfollow_topic!(topic)
+    else
+      follow_topic!(topic)
+    end
+  end
+
+  def follow_topic!(topic)
+    user_topics.create(topic: topic)
+  end
+
+  def unfollow_topic!(topic)
+    user_topics.where(topic: topic).destroy_all
+  end
 end
