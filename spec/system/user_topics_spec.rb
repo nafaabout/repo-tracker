@@ -3,14 +3,15 @@ require 'rails_helper'
 RSpec.describe 'User Topics', type: :system do
   let!(:topics) { Fabricate.times(10, :topic) }
   let(:uid) { OmniAuth.config.mock_auth[:auth0]['uid'] }
-  let!(:user) { Fabricate(:user, uid: uid) }
+  let!(:user) { User.find_by uid: uid }
 
-  before do
+  before(:all) do
     driven_by(:selenium)
+    # this will create the user with the uid in mock_auth
+    visit '/auth/auth0/callback'
   end
 
   it 'enables user to follow topics', js: true do
-    visit '/auth/auth0/callback'
     visit settings_topics_path
 
     topics_to_follow = topics.sample(2)

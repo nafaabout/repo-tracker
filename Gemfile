@@ -53,6 +53,7 @@ end
 
 group :development do
   gem 'annotate', '~> 3.1'
+  gem 'database_cleaner-active_record'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
