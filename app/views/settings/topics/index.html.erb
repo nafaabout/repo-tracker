@@ -1,4 +1,9 @@
 <div class="topics">
+  <h2 class="mx-2 mt-4 p-2 text-gray-600 font-bold text-xl">
+    Choose Topics
+  </h2>
+  <hr class='mx-4 border-b border-gray-500 w-24'/>
+
   <% @topics.each do |topic| %>
     <%= render partial: 'topic', locals: { topic: topic } %>
   <% end %>
