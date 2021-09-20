@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_30_220538) do
+ActiveRecord::Schema.define(version: 2021_09_20_125306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "owners", id: :binary, force: :cascade do |t|
     t.string "login", null: false
@@ -28,6 +34,8 @@ ActiveRecord::Schema.define(version: 2021_08_30_220538) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "category_id"
+    t.index ["category_id"], name: "index_topics_on_category_id"
   end
 
   create_table "user_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -51,6 +59,7 @@ ActiveRecord::Schema.define(version: 2021_08_30_220538) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "topics", "categories"
   add_foreign_key "user_topics", "topics"
   add_foreign_key "user_topics", "users"
 end

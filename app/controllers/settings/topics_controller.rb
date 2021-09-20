@@ -5,7 +5,7 @@ module Settings
     include Authenticated
 
     def index
-      @topics = Topic.all
+      @topic_categories = Category.includes(:topics).all
     end
 
     def follow
