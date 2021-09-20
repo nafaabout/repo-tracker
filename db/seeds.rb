@@ -1,7 +1,37 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+puts 'Creating Categories..'
+['Databases', 'Frameworks', 'Programming languages', 'DevOps', 'Security'].sort.each do |category|
+  Category.find_or_create_by(name: category)
+end
+
+puts 'Creating Programming Languages..'
+%w[Ruby Javascript C# Java Python Elixir Golang Dart Swift].sort.each do |lang|
+  category = Category.find_by(name: 'Programming languages')
+  Topic.find_or_create_by(name: lang, category: category)
+end
+
+puts 'Creating Databases..'
+['Postgresql', 'Oracle', 'MySQL', 'MongoDB', 'Cassandra', 'SQL Server', 'Redis'].sort.each do |db|
+  category = Category.find_by(name: 'Databases')
+  Topic.find_or_create_by(name: db, category: category)
+end
+
+puts 'Creating Frameworks..'
+['Ruby On Rails', 'Django', 'ExpressJS', 'Sinatra', 'Flask', 'Hanami', 'Laravel', 'Vue', 'React',
+ 'React Native'].sort.each do |framework|
+  category = Category.find_by(name: 'Frameworks')
+  Topic.find_or_create_by(name: framework, category: category)
+end
+
+puts 'Creating DevOps..'
+['Infrastructure', 'Continuous Delivery', 'Automation', 'Containers', 'Cloud', 'Observability'].sort.each do |role|
+  category = Category.find_by(name: 'Team roles')
+  Topic.find_or_create_by(name: role, category: category)
+end
+
+puts 'Creating Security..'
+['Data security', 'Identity and access management', 'Network security', 'Security training and jobs',
+ 'Infosec programs', 'Risk management strategies', 'Information security threats', 'Network threat detection',
+ 'Platform security', 'Security compliance', 'Software security'].sort.each do |sec_topic|
+  category = Category.find_by(name: 'Security')
+  Topic.find_or_create_by(name: sec_topic, category: category)
+end
