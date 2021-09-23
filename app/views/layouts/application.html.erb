@@ -20,9 +20,9 @@
         </div>
         <div class=''>
           <% if logged_in? %>
-            <%= button_to 'Logout', '/auth/logout', method: :get, class: 'rounded bg-green-600 text-white cursor-pointer p-2 mx-2' %>
+            <%= button_to 'Logout', '/auth/logout', method: :get, data: { turbo: 'false' }, class: 'rounded bg-green-600 text-white cursor-pointer p-2 mx-2' %>
           <% else %>
-            <%= button_to 'Login', '/auth/auth0', method: :post, class: 'rounded bg-green-600 text-white cursor-pointer p-2 mx-2' %>
+            <%= button_to 'Login', '/auth/auth0', method: :post, data: { turbo: 'false' }, class: 'rounded bg-green-600 text-white cursor-pointer p-2 mx-2' %>
           <% end %>
         </div>
       </div>
