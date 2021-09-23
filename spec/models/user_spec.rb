@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   subject!(:user) { Fabricate(:user) }
 
+  it { should have_many(:user_topics).dependent(:destroy) }
+
   describe '#following?' do
     let!(:topic) { Fabricate(:topic) }
 

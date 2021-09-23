@@ -16,7 +16,7 @@
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
-  has_many :user_topics
+  has_many :user_topics, dependent: :destroy
 
   def following?(topic)
     user_topics.exists?(topic: topic)

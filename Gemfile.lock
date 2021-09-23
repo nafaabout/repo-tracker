@@ -295,6 +295,8 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    shoulda-matchers (5.0.0)
+      activesupport (>= 5.2.0)
     spring (3.0.0)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -362,6 +364,7 @@ DEPENDENCIES
   ruby-ulid (>= 0.1.6, < 0.2.0)
   sass-rails (>= 6)
   selenium-webdriver
+  shoulda-matchers (~> 5.0)
   spring
   spring-commands-rspec
   tailwindcss-rails (~> 0.4.3)

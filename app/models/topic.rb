@@ -20,4 +20,5 @@
 #
 class Topic < ApplicationRecord
   belongs_to :category
+  has_many :user_topics, dependent: :destroy
 end

@@ -19,6 +19,6 @@
 #  fk_rails_...  (user_id => users.id)
 #
 Fabricator(:user_topic) do
-  user  nil
-  topic nil
+  user
+  topic
 end
