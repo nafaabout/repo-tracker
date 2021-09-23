@@ -44,6 +44,7 @@ end
 
 RSpec.configure do |config|
   config.include ActionView::RecordIdentifier, type: :system
+  config.include LoginHelpers, type: :system
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
