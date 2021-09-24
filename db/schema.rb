@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_20_125306) do
+ActiveRecord::Schema.define(version: 2021_09_24_083739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blog_article_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "blog_article_id", null: false
+    t.uuid "topic_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["blog_article_id"], name: "index_blog_article_topics_on_blog_article_id"
+    t.index ["topic_id"], name: "index_blog_article_topics_on_topic_id"
+  end
+
+  create_table "blog_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.datetime "published_at"
+    t.uuid "platform_id", null: false
+    t.jsonb "author"
+    t.integer "remote_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["platform_id"], name: "index_blog_articles_on_platform_id"
+  end
 
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
@@ -26,6 +47,15 @@ ActiveRecord::Schema.define(version: 2021_09_20_125306) do
     t.string "avatar_url"
     t.string "name", null: false
     t.string "owner_type", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "platforms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "base_url"
+    t.string "api_url"
+    t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -59,6 +89,9 @@ ActiveRecord::Schema.define(version: 2021_09_20_125306) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "blog_article_topics", "blog_articles"
+  add_foreign_key "blog_article_topics", "topics"
+  add_foreign_key "blog_articles", "platforms"
   add_foreign_key "topics", "categories"
   add_foreign_key "user_topics", "topics"
   add_foreign_key "user_topics", "users"
