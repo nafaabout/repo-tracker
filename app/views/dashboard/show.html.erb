@@ -1,0 +1,6 @@
+<div class="card" id="blog_articles">
+  <h2>Blog Articles</h2>
+  <% @blog_articles.each do |blog_article| %>
+    <%= link_to blog_article.title, blog_article.url, class: 'blog_article' %>
+  <% end %>
+</div>
