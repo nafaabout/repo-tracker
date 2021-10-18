@@ -29,9 +29,6 @@ gem 'tailwindcss-rails', '~> 0.4.3'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-# Generate globaly unique and lexecografically sortable ids
-gem 'ruby-ulid', '>= 0.1.6', '< 0.2.0'
-
 gem 'octokit'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-auth0', '~> 3.0'
