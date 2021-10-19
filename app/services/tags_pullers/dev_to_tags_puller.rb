@@ -8,7 +8,10 @@ module TagsPullers
       def pull(page: 1, per_page: 10)
         page = http_conn.get('tags', { page: page, per_page: per_page })
 
-        JSON.parse(page.body)
+        tags = JSON.parse(page.body)
+        yield tags if block_given?
+
+        tags
       end
 
       private
