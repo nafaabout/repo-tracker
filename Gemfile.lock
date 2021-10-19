@@ -99,6 +99,8 @@ GEM
     childprocess (3.0.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
+    crack (0.4.5)
+      rexml
     crass (1.0.6)
     database_cleaner-active_record (2.0.1)
       activerecord (>= 5.a)
@@ -132,6 +134,7 @@ GEM
     ffi (1.15.4)
     globalid (0.5.2)
       activesupport (>= 5.0)
+    hashdiff (1.0.1)
     hashie (4.1.0)
     hotwire-rails (0.1.3)
       rails (>= 6.0.0)
@@ -275,7 +278,6 @@ GEM
       rubocop (~> 1.0)
       rubocop-ast (>= 1.1.0)
     ruby-progressbar (1.11.0)
-    ruby-ulid (0.1.6)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
@@ -323,6 +325,10 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    webmock (3.14.0)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -344,6 +350,7 @@ DEPENDENCIES
   database_cleaner-active_record
   fabrication (~> 2.22)
   faker (~> 2.18)
+  faraday
   hotwire-rails (~> 0.1.3)
   jbuilder (~> 2.7)
   listen (~> 3.3)
@@ -361,7 +368,6 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   rubocop-rspec
-  ruby-ulid (>= 0.1.6, < 0.2.0)
   sass-rails (>= 6)
   selenium-webdriver
   shoulda-matchers (~> 5.0)
@@ -370,6 +376,7 @@ DEPENDENCIES
   tailwindcss-rails (~> 0.4.3)
   tzinfo-data
   web-console (>= 4.1.0)
+  webmock
   webpacker!
 
 RUBY VERSION
