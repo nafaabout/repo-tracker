@@ -8,9 +8,8 @@ class PullTagsJob < ApplicationJob
 
     tags_puller.pull(page: page, per_page: per_page) do |tags|
       tags.each do |tag|
-        tag = Tag.find_or_initialize_by(name: tag['name'])
-        tag.tag_platforms.build(platform: platform) if tag.persisted? && !tag.tag_platforms.exists?(platform: platform)
-        tag.save
+        tag = Tag.find_or_create_by(name: tag['name'])
+        tag.add_platform(platform)
       end
     end
   end
