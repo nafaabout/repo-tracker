@@ -35,3 +35,8 @@ puts 'Creating Security..'
   category = Category.find_by(name: 'Security')
   Topic.find_or_create_by(name: sec_topic, category: category)
 end
+
+puts 'Creating platforms'
+Platform.create_with(name: 'Dev.to',
+                     base_url: 'https://dev.to',
+                     api_url: 'https://dev.to/api').find_or_create_by(name: 'Dev.to')
