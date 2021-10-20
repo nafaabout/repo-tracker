@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TagsPullers::DevToTagsPuller, type: :service do
+RSpec.describe Tags::Pullers::DevTo, type: :service do
   describe '.pull' do
     let(:tags) { generate_tags_response_body(3) }
     let(:api_url) { described_class::API_URI }

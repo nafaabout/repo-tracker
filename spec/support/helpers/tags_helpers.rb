@@ -1,6 +1,6 @@
 module TagsHelpers
   def stub_tags_request(tags:, query: { page: 1, per_page: 10 })
-    stub_request(:get, TagsPullers::DevToTagsPuller::API_URI)
+    stub_request(:get, Tags::Pullers::DevTo::API_URI)
       .with(query: query)
       .to_return(status: 200, body: tags.to_json)
   end
