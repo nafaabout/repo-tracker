@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Tags::Puller, type: :service do
   subject(:tags_puller) { Tags::Puller.new(platform.name) }
 
-  let!(:platform) { Fabricate(:platform, name: 'Dev.to') }
+  let!(:platform) { Fabricate(:platform, name: 'Dev') }
 
   specify { expect(tags_puller.tags_puller).to be_a(Tags::Pullers::DevTo) }
 

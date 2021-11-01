@@ -2,7 +2,7 @@
 
 module Tags
   module Pullers
-    class DevTo
+    class Dev
       API_URI = 'https://dev.to/api/tags'
 
       def pull(page: 1, per_page: 10)

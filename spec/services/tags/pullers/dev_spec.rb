@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Tags::Pullers::DevTo, type: :service do
+RSpec.describe Tags::Pullers::Dev, type: :service do
   subject(:tags_puller) { described_class.new }
 
   describe '#more_tags?' do

@@ -24,7 +24,7 @@ Fabricator(:blog_article) do
   title        { Faker::Lorem.sentence }
   url          { Faker::Internet.url(host: 'dev.to') }
   published_at { Faker::Date.backward }
-  platform     { Fabricate(:platform, name: 'Dev.to') }
+  platform     { Fabricate(:platform, name: 'Dev') }
   author       { { name: Faker::Name.name } }
   remote_id { rand(1..100) }
 end
