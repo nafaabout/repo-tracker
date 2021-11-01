@@ -28,7 +28,7 @@ RSpec.describe PullTagsJob, type: :job do
     end
   end
 
-  context 'if page and per_page given' do
+  context 'when page and per_page given' do
     let(:page) { rand(10) }
     let(:per_page) { rand(20) }
 
@@ -37,6 +37,21 @@ RSpec.describe PullTagsJob, type: :job do
         .with(page: page, per_page: per_page)
 
       PullTagsJob.perform_now(platform: platform, page: page, per_page: per_page)
+    end
+  end
+
+  context 'when there are more tags to pull' do
+    let(:page) { rand(10) }
+    let(:per_page) { rand(10) }
+    let(:tags) { generate_tags_response_body(10) }
+
+    it 'schedules new jobs with the next 5 pages' do
+      ActiveJob::Base.queue_adapter = :test
+
+      allow(tags_puller).to receive(:pull).and_return([])
+      expect(tags_puller).to receive(:more_tags?).and_return(true)
+      PullTagsJob.perform_now(platform: platform, page: page, per_page: per_page)
+      expect(PullTagsJob).to have_been_enqueued.with(platform: platform, page: page.next, per_page: per_page)
     end
   end
 end
