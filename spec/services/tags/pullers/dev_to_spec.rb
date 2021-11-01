@@ -3,7 +3,35 @@ require 'rails_helper'
 RSpec.describe Tags::Pullers::DevTo, type: :service do
   subject(:tags_puller) { described_class.new }
 
-  describe '.pull' do
+  describe '#more_tags?' do
+    let(:tags) { generate_tags_response_body(response_tags_count) }
+    let(:page) { 1 }
+    let(:per_page) { 5 }
+
+    before do
+      stub_tags_request(tags: tags, query: { per_page: per_page })
+    end
+
+    context 'when pulled tags count == per_page' do
+      let(:response_tags_count) { per_page }
+
+      it 'returns false' do
+        tags_puller.pull(page: page, per_page: per_page)
+        expect(tags_puller.more_tags?).to eq true
+      end
+    end
+
+    context 'when pulled tags count < per_page' do
+      let(:response_tags_count) { per_page - 1 }
+
+      it 'returns false' do
+        tags_puller.pull(page: page, per_page: per_page)
+        expect(tags_puller.more_tags?).to eq false
+      end
+    end
+  end
+
+  describe '#pull' do
     let(:tags) { generate_tags_response_body(3) }
     let(:api_url) { described_class::API_URI }
     let(:query) { { page: 1, per_page: 10 } }
@@ -21,10 +49,6 @@ RSpec.describe Tags::Pullers::DevTo, type: :service do
 
     it 'returns an array of tags' do
       expect(tags_puller.pull).to eq(tags)
-    end
-
-    it 'yields tags if passed a block' do
-      expect { |b| tags_puller.pull(&b) }.to yield_with_args(tags)
     end
 
     context 'when no params specified' do
