@@ -1,8 +1,10 @@
 module TagsHelpers
-  def stub_tags_request(tags:, query: {})
+  def stub_tags_request(tags:, platform: nil, query: {})
+    platform ||= 'Dev'
+    api_uri = Tags::Puller.api_url_for(platform)
     query[:page] ||= 1
     query[:per_page] ||= 10
-    stub_request(:get, Tags::Pullers::Dev::API_URI)
+    stub_request(:get, api_uri)
       .with(query: query)
       .to_return(status: 200, body: tags.to_json)
   end

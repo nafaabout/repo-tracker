@@ -4,6 +4,22 @@ module Tags
   class Puller
     attr_reader :platform
 
+    class << self
+      def puller_class_for(platform)
+        @pullers_classes ||= {}
+        platform = platform.name if platform.is_a?(ActiveRecord::Base)
+        @pullers_classes[platform] ||= Tags::Pullers.const_get(platform.camelize)
+      end
+
+      def puller_for(platform)
+        puller_class_for(platform).new
+      end
+
+      def api_url_for(platform)
+        puller_class_for(platform)::API_URI
+      end
+    end
+
     def initialize(platform)
       @platform = platform
     end
@@ -17,11 +33,7 @@ module Tags
     end
 
     def tags_puller
-      @tags_puller ||= tags_puller_class.new
-    end
-
-    def tags_puller_class
-      @tags_puller_class ||= Tags::Pullers.const_get(platform.gsub('.', '_').camelize)
+      @tags_puller ||= self.class.puller_for(platform)
     end
   end
 end
