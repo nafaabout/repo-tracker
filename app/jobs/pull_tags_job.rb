@@ -13,7 +13,7 @@ class PullTagsJob < ApplicationJob
       tag.add_platform(platform)
     end
 
-    return if tags_puller.more_tags?
+    return unless tags_puller.more_tags?
 
     PullTagsJob.perform_later(platform: platform,
                               page: page.next,

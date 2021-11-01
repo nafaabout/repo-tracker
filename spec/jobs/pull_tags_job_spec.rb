@@ -15,12 +15,13 @@ RSpec.describe PullTagsJob, type: :job do
     it 'pulls 10 tags from page 1' do
       expect(tags_puller).to receive(:pull)
         .with(page: 1, per_page: 10)
+        .and_return(tags)
 
       PullTagsJob.perform_now(platform: platform)
     end
 
     it 'pulls tags from the given platform' do
-      stub_tags_request(tags: tags)
+      stub_tags_request(platform: platform, tags: tags)
 
       expect do
         PullTagsJob.perform_now(platform: platform)
@@ -35,6 +36,7 @@ RSpec.describe PullTagsJob, type: :job do
     it 'pulls that specific tags page from the given platform' do
       expect(tags_puller).to receive(:pull)
         .with(page: page, per_page: per_page)
+        .and_return([])
 
       PullTagsJob.perform_now(platform: platform, page: page, per_page: per_page)
     end

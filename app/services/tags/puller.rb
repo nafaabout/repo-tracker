@@ -2,8 +2,6 @@
 
 module Tags
   class Puller
-    attr_reader :platform
-
     class << self
       def puller_class_for(platform)
         @pullers_classes ||= {}
@@ -19,6 +17,8 @@ module Tags
         puller_class_for(platform)::API_URI
       end
     end
+
+    attr_reader :platform
 
     def initialize(platform)
       @platform = platform
