@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PullTagsJob, type: :job do
   let(:dev_to_tags_api_url) { 'https://dev.to/api/tags' }
-  let!(:platform) { Fabricate(:platform_with_no_tag, name: 'Dev.to') }
+  let!(:platform) { Fabricate(:platform, name: 'Dev.to') }
   let(:tags_puller) { Tags::Puller.new(platform.name) }
 
   before do

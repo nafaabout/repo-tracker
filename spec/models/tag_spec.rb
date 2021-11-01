@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Tag, type: :model do
-  let!(:platform) { Fabricate(:platform) }
+  let!(:platform) { Fabricate(:platform_with_tags) }
 
   it { should have_many(:tag_platforms) }
   it { should have_many(:platforms).through(:tag_platforms) }
@@ -16,7 +16,7 @@ RSpec.describe Tag, type: :model do
     end
 
     context 'when tag does not exist on platform' do
-      let!(:tag) { Fabricate(:tag_with_no_platform) }
+      let!(:tag) { Fabricate(:tag) }
 
       it 'checks if tag belongs to a platform' do
         expect(tag.exists_on?(platform)).to be false
@@ -34,7 +34,7 @@ RSpec.describe Tag, type: :model do
     end
 
     context 'when tag does not exist on platform' do
-      let!(:tag) { Fabricate(:tag_with_no_platform) }
+      let!(:tag) { Fabricate(:tag) }
 
       it 'creates a TagPlatform' do
         expect { tag.add_platform(platform) }.to change { tag.tag_platforms.count }.to(1)

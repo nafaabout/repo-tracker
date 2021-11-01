@@ -19,6 +19,6 @@
 #  fk_rails_...  (tag_id => tags.id)
 #
 Fabricator(:tag_platform) do
-  tag(fabricator: :tag_with_no_platform)
-  platform(fabricator: :platform_with_no_tag)
+  tag(fabricator: :tag)
+  platform(fabricator: :platform)
 end
