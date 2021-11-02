@@ -11,7 +11,7 @@ module Tags
     end
 
     context 'when no arguments provided for page and per_page' do
-      let(:tags) { generate_tags_response_body(10) }
+      let(:tags) { generate_tags_response_body(3) } # the number here is not important
 
       it 'pulls 10 tags from page 1' do
         expect(tags_puller).to receive(:pull)
@@ -21,12 +21,12 @@ module Tags
         PullJob.perform_now(platform: platform)
       end
 
-      it 'pulls tags from the given platform' do
+      it 'creates tags and associate the platform to them' do
         stub_tags_request(platform: platform, tags: tags)
 
         expect do
           PullJob.perform_now(platform: platform)
-        end.to change { Tag.count }.to(tags.count)
+        end.to change { [Tag.count, TagPlatform.count] }.to([tags.size, tags.size])
       end
     end
 
