@@ -40,6 +40,8 @@ gem 'rubocop-rspec', require: false
 
 gem 'faraday'
 
+gem "sidekiq", "~> 6.2"
+
 group :development, :test do
   gem 'awesome_print'
   gem 'better_errors'

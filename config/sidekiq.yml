@@ -1,0 +1,9 @@
+
+:development:
+  :concurrency: 10
+
+:production:
+  :concurrency: 30
+
+:queues:
+  - tags_pull
