@@ -21,7 +21,7 @@ Bundler.require(*Rails.groups)
 
 module RepoTracker
   class Application < Rails::Application
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = Rails.env.test? ? :async : :sidekiq
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
