@@ -10,6 +10,8 @@ module Tags
       allow(Tags::Puller).to receive(:new).with(platform.name).and_return(tags_puller)
     end
 
+    specify { expect(described_class.queue_name).to eq('tags_pull') }
+
     context 'when no arguments provided for page and per_page' do
       let(:tags) { generate_tags_response_body(3) } # the number here is not important
 
