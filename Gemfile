@@ -6,7 +6,7 @@ ruby '3.1.0'
 gem "rubycritic", require: false
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.4'
+gem 'rails', '~> 7.0.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
@@ -55,7 +55,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'annotate', '~> 3.1'
+  # gem 'annotate'
   gem 'database_cleaner-active_record'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
