@@ -25,7 +25,7 @@ module Tags
     end
 
     def pull(page: 1, per_page: 10, &block)
-      tags_puller.pull(page: page, per_page: per_page, &block)
+      tags_puller.pull(page:, per_page:, &block)
     end
 
     def more_tags?
