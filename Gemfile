@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.0'
 
-gem "rubycritic", require: false
+gem 'rubycritic', require: false
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 7.0.1'
@@ -42,7 +42,7 @@ gem 'rubocop-rspec', require: false
 
 gem 'faraday'
 
-gem "sidekiq", "~> 6.2"
+gem 'sidekiq', '~> 6.2'
 
 group :development, :test do
   gem 'awesome_print'
@@ -64,8 +64,8 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-commands-rspec'
+  # gem 'spring'
+  # gem 'spring-commands-rspec'
 
   gem 'rspec-rails', '~> 5.0.0'
 end
@@ -76,4 +76,3 @@ group :test do
   gem 'shoulda-matchers', '~> 5.0'
   gem 'webmock'
 end
-
