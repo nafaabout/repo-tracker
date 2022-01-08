@@ -16,4 +16,14 @@ class Platform < ApplicationRecord
   has_many :blog_articles
   has_many :tag_platforms, dependent: :destroy
   has_many :tags, through: :tag_platforms
+
+  before_save :api_url_ends_with_slash
+
+  private
+
+  def api_url_ends_with_slash
+    return if api_url.ends_with?('/')
+
+    self.api_url = "#{api_url}/"
+  end
 end
