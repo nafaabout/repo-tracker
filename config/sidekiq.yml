@@ -8,3 +8,4 @@
 
 :queues:
   - tags_pull
+  - articles_pull
