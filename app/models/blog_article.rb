@@ -24,6 +24,9 @@
 #
 class BlogArticle < ApplicationRecord
   belongs_to :platform
-  has_many :blog_article_topics
-  has_many :topics, through: :blog_article_topics
+  has_many :tag_articles
+  has_many :tags, through: :tag_articles
+
+  # has_many :blog_article_topics
+  # has_many :topics, through: :blog_article_topics
 end
