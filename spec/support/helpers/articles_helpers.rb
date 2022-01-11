@@ -20,14 +20,16 @@ module ArticlesHelpers
     end
   end
 
-  def generate_articles_response_body(count = 3)
+  def generate_articles_response_body(count = 3, tags: nil)
     count.times.map do
-      generate_article_attributes
+      generate_article_attributes(tags:)
     end
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-  def generate_article_attributes
+  def generate_article_attributes(tags: nil)
+    tags ||= Fabricate.times(3, :tag).map(&:name)
+
     {
       'id' => rand(1000),
       'title' => Faker::Book.title,
@@ -40,7 +42,7 @@ module ArticlesHelpers
       'edited_at' => Faker::Time.backward.to_s,
       'published_at' => Faker::Time.backward.to_s,
       'reading_time_minutes' => rand(10),
-      'tag_list' => Fabricate.times(3, :tag).map(&:name),
+      'tag_list' => tags,
       'user' => {
         'name' => Faker::Name.name,
         'username' => Faker::Internet.username,

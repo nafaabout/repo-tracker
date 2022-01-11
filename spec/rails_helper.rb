@@ -49,6 +49,7 @@ WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|
   config.include ActionView::RecordIdentifier, type: :system
   config.include LoginHelpers, type: :system
+
   [ArticlesHelpers, TagsHelpers].each do |helper|
     config.include helper, %i[service job]
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 module Tags
@@ -20,14 +22,14 @@ module Tags
           .with(page: 1, per_page: 10)
           .and_return(tags)
 
-        PullJob.perform_now(platform: platform)
+        PullJob.perform_now(platform:)
       end
 
       it 'creates tags and associate the platform to them' do
-        stub_tags_request(platform: platform, tags: tags)
+        stub_tags_request(platform:, tags:)
 
         expect do
-          PullJob.perform_now(platform: platform)
+          PullJob.perform_now(platform:)
         end.to change { [Tag.count, TagPlatform.count] }.to([tags.size, tags.size])
       end
     end
@@ -38,10 +40,10 @@ module Tags
 
       it 'pulls that specific tags page from the given platform' do
         expect(tags_puller).to receive(:pull)
-          .with(page: page, per_page: per_page)
+          .with(page:, per_page:)
           .and_return([])
 
-        PullJob.perform_now(platform: platform, page: page, per_page: per_page)
+        PullJob.perform_now(platform:, page:, per_page:)
       end
     end
 
@@ -55,8 +57,8 @@ module Tags
 
         allow(tags_puller).to receive(:pull).and_return([])
         expect(tags_puller).to receive(:more_tags?).and_return(true)
-        PullJob.perform_now(platform: platform, page: page, per_page: per_page)
-        expect(PullJob).to have_been_enqueued.with(platform: platform, page: page.next, per_page: per_page)
+        PullJob.perform_now(platform:, page:, per_page:)
+        expect(PullJob).to have_been_enqueued.with(platform:, page: page.next, per_page:)
       end
     end
   end
