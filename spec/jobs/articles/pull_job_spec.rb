@@ -75,5 +75,39 @@ module Articles
         end
       end
     end
+
+    context 'When NOT specifying a max number of pages to pull' do
+      let(:max_pages) { nil }
+      let(:page) { rand(1) }
+      let(:per_page) { 10 }
+
+      before do
+        allow(puller).to receive(:pull)
+          .with('articles', page:, per_page:)
+          .and_return([])
+      end
+
+      context 'and still have more articles to pull' do
+        it 'schedule new jobs' do
+          expect(puller).to receive(:have_more?).and_return(true)
+
+          expect do
+            PullJob.perform_now(platform:, page:, per_page:, max_pages:)
+          end.to enqueue_job(PullJob)
+            .with(platform:, page: page.next, per_page:, max_pages:)
+            .exactly(:once)
+        end
+      end
+
+      context 'and no more articles to pull' do
+        it 'stops scheduling new jobs' do
+          expect(puller).to receive(:have_more?).and_return(false)
+
+          expect do
+            PullJob.perform_now(platform:, page:, per_page:, max_pages:)
+          end.to_not enqueue_job(PullJob)
+        end
+      end
+    end
   end
 end

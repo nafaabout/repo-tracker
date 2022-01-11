@@ -14,8 +14,8 @@ module Articles
         creator.create_article(attributes: article)
       end
 
-      limit_reached = max_pages && page >= max_pages
-      return if limit_reached || puller.have_more?
+      can_pull_more = max_pages.nil? ? puller.have_more? : page < max_pages
+      return unless can_pull_more
 
       PullJob.perform_later(platform:, page: page.next, per_page:, max_pages:)
     end
