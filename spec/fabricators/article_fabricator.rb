@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: blog_articles
+# Table name: articles
 #
 #  id           :uuid             not null, primary key
 #  author       :jsonb
@@ -16,13 +16,13 @@
 #
 # Indexes
 #
-#  index_blog_articles_on_platform_id  (platform_id)
+#  index_articles_on_platform_id  (platform_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (platform_id => platforms.id)
 #
-Fabricator(:blog_article) do
+Fabricator(:article) do
   title        { Faker::Lorem.sentence }
   url          { Faker::Internet.url(host: 'dev.to') }
   published_at { Faker::Date.backward }

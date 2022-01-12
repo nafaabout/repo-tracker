@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_11_153552) do
+ActiveRecord::Schema.define(version: 2022_01_12_100512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,16 +37,16 @@ ActiveRecord::Schema.define(version: 2022_01_11_153552) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "blog_article_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "blog_article_id", null: false
+  create_table "article_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "article_id", null: false
     t.uuid "topic_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["blog_article_id"], name: "index_blog_article_topics_on_blog_article_id"
-    t.index ["topic_id"], name: "index_blog_article_topics_on_topic_id"
+    t.index ["article_id"], name: "index_article_topics_on_article_id"
+    t.index ["topic_id"], name: "index_article_topics_on_topic_id"
   end
 
-  create_table "blog_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.string "url"
     t.datetime "published_at", precision: 6
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2022_01_11_153552) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
     t.string "image"
-    t.index ["platform_id"], name: "index_blog_articles_on_platform_id"
+    t.index ["platform_id"], name: "index_articles_on_platform_id"
   end
 
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -86,10 +86,10 @@ ActiveRecord::Schema.define(version: 2022_01_11_153552) do
 
   create_table "tag_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "tag_id", null: false
-    t.uuid "blog_article_id", null: false
+    t.uuid "article_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["blog_article_id"], name: "index_tag_articles_on_blog_article_id"
+    t.index ["article_id"], name: "index_tag_articles_on_article_id"
     t.index ["tag_id"], name: "index_tag_articles_on_tag_id"
   end
 
@@ -138,10 +138,10 @@ ActiveRecord::Schema.define(version: 2022_01_11_153552) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "blog_article_topics", "blog_articles"
-  add_foreign_key "blog_article_topics", "topics"
-  add_foreign_key "blog_articles", "platforms"
-  add_foreign_key "tag_articles", "blog_articles"
+  add_foreign_key "article_topics", "articles"
+  add_foreign_key "article_topics", "topics"
+  add_foreign_key "articles", "platforms"
+  add_foreign_key "tag_articles", "articles"
   add_foreign_key "tag_articles", "tags"
   add_foreign_key "tag_platforms", "platforms"
   add_foreign_key "tag_platforms", "tags"

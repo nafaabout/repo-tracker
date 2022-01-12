@@ -13,7 +13,7 @@
 #  updated_at :datetime         not null
 #
 class Platform < ApplicationRecord
-  has_many :blog_articles
+  has_many :articles
   has_many :tag_platforms, dependent: :destroy
   has_many :tags, through: :tag_platforms
 

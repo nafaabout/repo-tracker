@@ -11,7 +11,7 @@ RSpec.describe Articles::Creator, type: :service do
     let(:attributes) { generate_article_attributes }
 
     it 'creates new article' do
-      expect { creator.create_article(attributes:) }.to change(platform.blog_articles, :count).by(1)
+      expect { creator.create_article(attributes:) }.to change(platform.articles, :count).by(1)
     end
   end
 end

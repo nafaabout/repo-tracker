@@ -13,7 +13,7 @@ class Tag < ApplicationRecord
   has_many :tag_platforms, dependent: :destroy
   has_many :platforms, through: :tag_platforms
   has_many :tag_articles
-  has_many :blog_articles, through: :tag_articles
+  has_many :articles, through: :tag_articles
 
   def add_platform(platform)
     return if exists_on?(platform)

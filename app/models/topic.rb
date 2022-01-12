@@ -21,6 +21,6 @@
 class Topic < ApplicationRecord
   belongs_to :category
   has_many :user_topics, dependent: :destroy
-  has_many :blog_article_topics, dependent: :destroy
-  has_many :blog_articles, through: :blog_article_topics
+  has_many :article_topics, dependent: :destroy
+  has_many :articles, through: :article_topics
 end

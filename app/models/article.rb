@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: blog_articles
+# Table name: articles
 #
 #  id           :uuid             not null, primary key
 #  author       :jsonb
@@ -16,17 +16,17 @@
 #
 # Indexes
 #
-#  index_blog_articles_on_platform_id  (platform_id)
+#  index_articles_on_platform_id  (platform_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (platform_id => platforms.id)
 #
-class BlogArticle < ApplicationRecord
+class Article < ApplicationRecord
   belongs_to :platform
   has_many :tag_articles
   has_many :tags, through: :tag_articles
 
-  # has_many :blog_article_topics
-  # has_many :topics, through: :blog_article_topics
+  # has_many :article_topics
+  # has_many :topics, through: :article_topics
 end

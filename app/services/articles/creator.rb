@@ -10,12 +10,12 @@ module Articles
 
     def create_article(attributes:)
       platform_id = platform.id
-      return if BlogArticle.exists?(platform_id:, remote_id: attributes['id'])
+      return if Article.exists?(platform_id:, remote_id: attributes['id'])
 
       attributes = normalizer.article_attributes(attributes)
       attributes[:platform_id] = platform_id
       tags = attributes.delete(:tags)
-      article = BlogArticle.create(attributes)
+      article = Article.create(attributes)
       tag_article_with(article, tags)
     end
 

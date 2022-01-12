@@ -26,7 +26,7 @@ module Articles
 
         expect do
           PullJob.perform_now(platform:)
-        end.to change(BlogArticle, :count).to(articles.count)
+        end.to change(Article, :count).to(articles.count)
       end
     end
 

@@ -6,7 +6,7 @@ RSpec.describe Tag, type: :model do
   it { should have_many(:tag_platforms) }
   it { should have_many(:platforms).through(:tag_platforms) }
   it { should have_many(:tag_articles) }
-  it { should have_many(:blog_articles).through(:tag_articles) }
+  it { should have_many(:articles).through(:tag_articles) }
 
   describe '#exists_on?' do
     context 'when tag already exists on platform' do
