@@ -1,8 +1,0 @@
-<%= turbo_frame_tag dom_id(topic) do %>
-  <%= button_to follow_settings_topic_path(topic),
-      form_class: 'inline-block',
-      class: topic_classes(topic),
-      method: :post do %>
-    <%= topic.name %>
-  <% end %>
-<% end %>

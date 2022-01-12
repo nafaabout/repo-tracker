@@ -3,76 +3,46 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   subject!(:user) { Fabricate(:user) }
 
-  it { should have_many(:user_topics).dependent(:destroy) }
+  it { should have_many(:user_tags).dependent(:destroy) }
 
-  describe '#following?' do
-    let!(:topic) { Fabricate(:topic) }
+  describe '#following_tag?' do
+    let!(:tag) { Fabricate(:tag) }
 
-    context 'when user is not following topic' do
+    context 'when user is not following tag' do
       before do
-        UserTopic.destroy_all
+        UserTag.destroy_all
       end
 
       it 'returns false' do
-        expect(user.following?(topic)).to be false
+        expect(user.following_tag?(tag)).to be false
       end
     end
 
-    context 'when user is following topic' do
+    context 'when user is following tag' do
       before do
-        UserTopic.create(user: user, topic: topic)
+        UserTag.create(user:, tag:)
       end
 
       it 'returns true' do
-        expect(user.following?(topic)).to eq true
+        expect(user.following_tag?(tag)).to eq true
       end
     end
   end
 
-  describe '#follow_topic!' do
-    let!(:topic) { Fabricate(:topic) }
+  describe '#toggle_follow_tag!' do
+    let!(:tag) { Fabricate(:tag) }
 
-    context 'when user is not following topic' do
-      it 'sets user to follow topic' do
-        expect { user.follow_topic!(topic) }.to change { user.following?(topic) }.to(true)
+    context 'when user is following tag' do
+      it 'unfollows tag' do
+        user.user_tags.create(tag:)
+        expect { user.toggle_follow_tag!(tag) }.to change { user.following_tag?(tag) }.to(false)
       end
     end
 
-    context 'when user is already following topic' do
-      before do
-        user.user_topics.create(topic: topic)
-      end
-
-      it 'raises and error' do
-        expect { user.follow_topic!(topic) }.to_not change(user.user_topics, :count)
-        expect(user).to be_following(topic)
-      end
-    end
-  end
-
-  describe '#unfollow_topic!' do
-    let!(:topic) { Fabricate(:topic) }
-
-    it 'deletes user_topic' do
-      user.user_topics.create(topic: topic)
-      expect { user.unfollow_topic!(topic) }.to change { user.following?(topic) }.to(false)
-    end
-  end
-
-  describe '#toggle_follow!' do
-    let!(:topic) { Fabricate(:topic) }
-
-    context 'when user is following topic' do
-      it 'unfollows topic' do
-        user.user_topics.create(topic: topic)
-        expect { user.toggle_follow!(topic) }.to change { user.following?(topic) }.to(false)
-      end
-    end
-
-    context 'when user is not following topic' do
-      it 'follows topic' do
-        user.user_topics.destroy_all
-        expect { user.toggle_follow!(topic) }.to change { user.following?(topic) }.to(true)
+    context 'when user is not following tag' do
+      it 'follows tag' do
+        user.user_tags.destroy_all
+        expect { user.toggle_follow_tag!(tag) }.to change { user.following_tag?(tag) }.to(true)
       end
     end
   end

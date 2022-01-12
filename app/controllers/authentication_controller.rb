@@ -9,10 +9,10 @@ class AuthenticationController < ApplicationController
     auth_info = request.env['omniauth.auth']
 
     user = find_or_build_user(auth_info['uid'])
-    next_path = if user.persisted? && user.user_topics.present?
+    next_path = if user.persisted? && user.user_tags.present?
                   dashboard_path
                 else
-                  settings_topics_path
+                  settings_tags_path
                 end
     update_user(user, build_user_attributes(auth_info))
 
@@ -45,7 +45,7 @@ class AuthenticationController < ApplicationController
   end
 
   def find_or_build_user(uid)
-    User.find_or_initialize_by(uid: uid)
+    User.find_or_initialize_by(uid:)
   end
 
   def update_user(user, user_attrs)

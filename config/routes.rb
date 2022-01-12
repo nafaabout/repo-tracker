@@ -13,7 +13,13 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'dashboard#show', as: :dashboard
   namespace :settings do
-    resources :topics, only: [:index] do
+    # resources :topics, only: [:index] do
+    #   member do
+    #     post :follow
+    #   end
+    # end
+
+    resources :tags, only: [:index] do
       member do
         post :follow
       end

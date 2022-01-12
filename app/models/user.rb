@@ -16,26 +16,28 @@
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
-  has_many :user_topics, dependent: :destroy
+  has_many :user_tags, dependent: :destroy
 
-  def following?(topic)
-    user_topics.exists?(topic: topic)
+  def following_tag?(tag)
+    user_tags.exists?(tag:)
   end
 
-  def toggle_follow!(topic)
-    user_topic = user_topics.find_by(topic: topic)
-    if user_topic.present?
-      unfollow_topic!(topic)
+  def toggle_follow_tag!(tag)
+    user_tag = user_tags.find_by(tag:)
+    if user_tag.present?
+      unfollow_tag!(tag)
     else
-      follow_topic!(topic)
+      follow_tag!(tag)
     end
   end
 
-  def follow_topic!(topic)
-    user_topics.create(topic: topic)
+  private
+
+  def follow_tag!(tag)
+    user_tags.create(tag:)
   end
 
-  def unfollow_topic!(topic)
-    user_topics.where(topic: topic).destroy_all
+  def unfollow_tag!(tag)
+    user_tags.where(tag:).destroy_all
   end
 end

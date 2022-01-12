@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_12_100512) do
+ActiveRecord::Schema.define(version: 2022_01_12_111917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,24 +32,21 @@ ActiveRecord::Schema.define(version: 2022_01_12_100512) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
+    t.string "checksum"
     t.datetime "created_at", precision: 6, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "article_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "article_id", null: false
-    t.uuid "topic_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["article_id"], name: "index_article_topics_on_article_id"
-    t.index ["topic_id"], name: "index_article_topics_on_topic_id"
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.string "url"
-    t.datetime "published_at", precision: 6
+    t.datetime "published_at"
     t.uuid "platform_id", null: false
     t.jsonb "author"
     t.integer "remote_id"
@@ -108,21 +105,13 @@ ActiveRecord::Schema.define(version: 2022_01_12_100512) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.uuid "category_id"
-    t.index ["category_id"], name: "index_topics_on_category_id"
-  end
-
-  create_table "user_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "user_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.uuid "topic_id", null: false
+    t.uuid "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["topic_id"], name: "index_user_topics_on_topic_id"
-    t.index ["user_id"], name: "index_user_topics_on_user_id"
+    t.index ["tag_id"], name: "index_user_tags_on_tag_id"
+    t.index ["user_id"], name: "index_user_tags_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -138,14 +127,12 @@ ActiveRecord::Schema.define(version: 2022_01_12_100512) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "article_topics", "articles"
-  add_foreign_key "article_topics", "topics"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "platforms"
   add_foreign_key "tag_articles", "articles"
   add_foreign_key "tag_articles", "tags"
   add_foreign_key "tag_platforms", "platforms"
   add_foreign_key "tag_platforms", "tags"
-  add_foreign_key "topics", "categories"
-  add_foreign_key "user_topics", "topics"
-  add_foreign_key "user_topics", "users"
+  add_foreign_key "user_tags", "tags"
+  add_foreign_key "user_tags", "users"
 end

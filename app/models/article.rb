@@ -26,7 +26,4 @@ class Article < ApplicationRecord
   belongs_to :platform
   has_many :tag_articles
   has_many :tags, through: :tag_articles
-
-  # has_many :article_topics
-  # has_many :topics, through: :article_topics
 end

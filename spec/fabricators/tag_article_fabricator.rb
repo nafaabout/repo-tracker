@@ -1,4 +1,4 @@
 Fabricator(:tag_article) do
-  tag     nil
-  article nil
+  tag
+  article
 end

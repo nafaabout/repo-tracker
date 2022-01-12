@@ -15,11 +15,11 @@ RSpec.describe 'Dashboard Articles', type: :system do
 
   context 'when user is logged in' do
     let!(:user) { Fabricate(:user) }
-    let!(:user_topics) { Fabricate.times(3, :user_topic) }
-    let!(:topics) { user_topics.map(&:topic) }
+    let!(:user_tags) { Fabricate.times(3, :user_tag) }
+    let!(:tags) { user_tags.map(&:tag) }
     let!(:platforms) { Fabricate.times(2, :platform) }
-    let!(:article_topics) do
-      articles.map { |ba| Fabricate(:article_topic, topic: topics.sample, article: ba) }
+    let!(:tag_articles) do
+      articles.map { |ba| Fabricate(:tag_article, tag: tags.sample, article: ba) }
     end
     let!(:articles) { 11.times.map { Fabricate(:article, platform: platforms.sample) } }
 
@@ -27,7 +27,7 @@ RSpec.describe 'Dashboard Articles', type: :system do
       mock_auth0_login
     end
 
-    it 'shows latest 10 articles about the selected user topics' do
+    it 'shows latest 10 articles about the selected user tags' do
       visit dashboard_path
 
       expect(page).to have_selector('.card#articles', text: 'Articles')
