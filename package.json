@@ -19,10 +19,10 @@
     ]
   },
   "browserslist": [
-    "defaults"
+    "defaults",
+    "not IE 11"
   ],
   "devDependencies": {
-    "@webpack-cli/serve": "^1.5.2",
     "webpack-dev-server": "^4.2.1"
   }
 }
