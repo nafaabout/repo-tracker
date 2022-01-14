@@ -1,11 +1,17 @@
-<div class="tags">
+<div class="tags" data-controller="tags">
   <h2 class="mx-2 mt-4 p-2 text-gray-600 font-bold text-xl">
     Choose Tags
   </h2>
 
   <hr class='mx-4 border-b border-gray-500 w-24'/>
 
-  <%= render partial: 'tag', collection: @tags %>
+  <%= turbo_frame_tag "tags_filter_frame", target: "tags" do%>
+    <%= form_with url: filter_settings_tags_path, data: { tags_target: 'filterForm' } do |form| %>
+      <%= form.search_field :filter_term,
+        data: { tags_target: "filterTerm", action: 'keyup->tags#filter' },
+        placeholder: "Search tags..." %>
+    <% end %>
+  <% end %>
+
+  <%= render partial: "tags", object: @tags %>
 </div>
-
-

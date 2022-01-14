@@ -1,0 +1,5 @@
+<%= turbo_frame_tag id="tags" do %>
+  <%- @tags.each do |tag| %>
+    <%= turbo_stream.append "tags", tag %>
+  <% end %>
+<% end %>

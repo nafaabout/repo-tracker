@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "tags" do %>
+  <% tags.each do |tag| %>
+    <%= render partial: 'tag', object: tag %>
+  <% end %>
+<% end %>

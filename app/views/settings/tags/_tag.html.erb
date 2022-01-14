@@ -1,6 +1,7 @@
 <%= turbo_frame_tag dom_id(tag) do %>
   <%= button_to follow_settings_tag_path(tag),
       form_class: 'inline-block',
+      id: dom_id(tag),
       class: tag_classes(tag),
       method: :post do %>
     <%= tag.name %>

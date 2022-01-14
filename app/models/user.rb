@@ -19,11 +19,12 @@ class User < ApplicationRecord
   has_many :user_tags, dependent: :destroy
 
   def following_tag?(tag)
-    user_tags.exists?(tag:)
+    user_tags.any?{ _1.tag.id == tag.id }
   end
 
   def toggle_follow_tag!(tag)
     user_tag = user_tags.find_by(tag:)
+
     if user_tag.present?
       unfollow_tag!(tag)
     else
@@ -34,7 +35,7 @@ class User < ApplicationRecord
   private
 
   def follow_tag!(tag)
-    user_tags.create(tag:)
+    user_tags.create!(tag:)
   end
 
   def unfollow_tag!(tag)

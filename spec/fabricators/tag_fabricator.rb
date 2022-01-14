@@ -8,7 +8,7 @@
 #  updated_at :datetime         not null
 #
 Fabricator(:tag, class_name: :tag) do
-  name { Faker::Book.genre }
+  name { Faker::Book.genre + rand(100).to_s } # unique values
 end
 
 Fabricator(:tag_with_platform, from: :tag) do

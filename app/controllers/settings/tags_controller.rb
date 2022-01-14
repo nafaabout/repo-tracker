@@ -5,7 +5,15 @@ module Settings
     include Authenticated
 
     def index
-      @tags = Tag.all
+      @tags = Tag.first(20)
+    end
+
+    def filter
+      @tags = Tag.where('name ILIKE ?', "#{params[:filter_term]}%")
+
+      respond_to do |format|
+        format.turbo_stream
+      end
     end
 
     def follow

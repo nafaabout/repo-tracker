@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     # end
 
     resources :tags, only: [:index] do
+      post :filter, on: :collection, as: :filter
       member do
         post :follow
       end
