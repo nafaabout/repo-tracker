@@ -11,8 +11,10 @@ gem 'rails', '~> 7.0.1'
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
-# Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem 'sprockets-rails', '>= 3.4.1'
+
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -26,7 +28,7 @@ gem 'redis', '~> 4.0'
 # gem 'image_processing', '~> 1.2'
 
 gem 'hotwire-rails', '~> 0.1.3'
-gem 'tailwindcss-rails', '~> 0.4.3'
+gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.4'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
