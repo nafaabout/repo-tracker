@@ -28,6 +28,7 @@ RSpec.describe 'User Tags', type: :system do
   end
 
   context 'Searching tags' do
+    let(:tags_count) { 25 }
     let(:filter) { tags.first.name[0, 3] }
     let(:matched_tags) { tags.select{ _1.name.starts_with?(filter) } }
     let(:rejected_tags) { tags.select{ !_1.name.starts_with?(filter) } }
@@ -38,13 +39,34 @@ RSpec.describe 'User Tags', type: :system do
       fill_in 'filter_term', with: filter
 
       expect(page).to have_selector('.tag', count: matched_tags.size)
-      matched_tags.each do |tag|
+      matched_tags[0...20].each do |tag|
         expect(page).to have_selector("##{dom_id(tag)}", text: tag.name)
       end
 
       rejected_tags.each do |tag|
         expect(page).to_not have_selector(".tag##{dom_id(tag)}", text: tag.name)
       end
+    end
+
+    context 'When more than 20 matching tags' do
+      let(:filter) { 'rub' }
+      let!(:tags) { Fabricate.times(tags_count, :tag, name: 'ruby') }
+
+      it 'loads only the first 20 matching tags' do
+        visit settings_tags_path
+
+        fill_in 'filter_term', with: filter
+
+        expect(page).to have_selector('.tag', text: 'ruby', count: 20)
+      end
+
+      context 'When clicking "Load more"' do
+        it 'loads the next 20 tags'
+      end
+    end
+
+    context 'When there are <= 20 matching tags' do
+      it 'does not show "Load more"'
     end
   end
 

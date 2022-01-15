@@ -5,7 +5,7 @@ module Settings
     include Authenticated
 
     def index
-      @tags = Tag.first(20)
+      @pagy, @tags = pagy(Tag.order(name: :desc))
     end
 
     def filter

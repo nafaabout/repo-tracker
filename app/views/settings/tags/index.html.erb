@@ -13,5 +13,5 @@
     <% end %>
   <% end %>
 
-  <%= render partial: "tags", object: @tags %>
+  <%= render partial: "tags", locals: { tags: @tags, pagy: @pagy } %>
 </div>

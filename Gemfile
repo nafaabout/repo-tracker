@@ -28,6 +28,7 @@ gem 'redis', '~> 4.0'
 # gem 'image_processing', '~> 1.2'
 
 gem 'hotwire-rails', '~> 0.1.3'
+gem 'pagy', '~> 5.7'
 gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.4'
 
 # Reduces boot times through caching; required in config/boot.rb
